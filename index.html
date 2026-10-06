@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TubeKit – Free YouTube Transcript, Thumbnail, Title, Hashtag &amp; Tag Tools</title>
+<meta name="description" content="Paste a YouTube link and get the full transcript instantly. Also download thumbnails, generate titles and hashtags, and extract video tags. Free, no signup.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="TubeKit – Free YouTube Tools">
+<meta property="og:description" content="YouTube transcript generator, thumbnail downloader, title and hashtag generator, tag extractor.">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"TubeKit","applicationCategory":"MultimediaApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
+<script>try{document.documentElement.dataset.theme=localStorage.th||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light')}catch(e){document.documentElement.dataset.theme='light'}</script>
+<style>
+:root{--bg:#f3f6fc;--bg2:#e3eafa;--card:rgba(255,255,255,.74);--bd:rgba(20,30,60,.1);--tx:#101828;--mu:#566074;--ac:#d92d2a;--ac2:#ff6a3d;--sh:0 12px 40px rgba(30,40,90,.13);--g1:rgba(217,45,42,.17);--g2:rgba(60,110,255,.17);--in:rgba(255,255,255,.9)}
+[data-theme=dark]{--bg:#0a0c13;--bg2:#121626;--card:rgba(24,28,46,.68);--bd:rgba(255,255,255,.09);--tx:#eef1f8;--mu:#9aa3b8;--ac:#e8403d;--ac2:#ff8a4d;--sh:0 16px 50px rgba(0,0,0,.55);--g1:rgba(255,77,74,.17);--g2:rgba(90,80,255,.22);--in:rgba(10,12,20,.6)}
+[data-theme=blue]{--bg:#061630;--bg2:#0a2550;--card:rgba(14,50,102,.56);--bd:rgba(140,190,255,.2);--tx:#eaf3ff;--mu:#a3bde0;--ac:#1f7ae0;--ac2:#18b6d8;--sh:0 16px 50px rgba(0,10,40,.6);--g1:rgba(56,163,255,.26);--g2:rgba(110,231,255,.15);--in:rgba(4,20,48,.55)}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{font:400 16px/1.6 Inter,system-ui,sans-serif;color:var(--tx);min-height:100vh;background:radial-gradient(900px 520px at 12% -8%,var(--g1),transparent),radial-gradient(800px 520px at 92% 8%,var(--g2),transparent),linear-gradient(180deg,var(--bg),var(--bg2)) fixed;transition:background .5s,color .4s;overflow-x:hidden}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;opacity:.06;z-index:0;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.8'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E")}
+.blob{position:fixed;border-radius:50%;filter:blur(70px);opacity:.35;z-index:0;animation:fl 18s ease-in-out infinite alternate}
+.b1{width:320px;height:320px;background:var(--ac);top:20%;left:-80px}.b2{width:380px;height:380px;background:var(--ac2);bottom:5%;right:-120px;animation-delay:-6s}
+@keyframes fl{to{transform:translate(60px,-70px) scale(1.15)}}
+nav,main,section,footer,header{position:relative;z-index:1}
+nav{position:sticky;top:0;z-index:20;display:flex;justify-content:space-between;align-items:center;padding:12px 5vw;background:var(--card);backdrop-filter:blur(16px);border-bottom:1px solid var(--bd)}
+.logo{font-weight:800;font-size:1.25rem;letter-spacing:-.02em}.logo i{font-style:normal;color:var(--ac)}
+.th{display:flex;gap:4px;padding:4px;border-radius:99px;background:var(--in);border:1px solid var(--bd)}
+.th button{border:0;background:none;width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:16px;transition:.25s}
+html[data-theme=light] [data-t=light],html[data-theme=dark] [data-t=dark],html[data-theme=blue] [data-t=blue]{background:linear-gradient(135deg,var(--ac),var(--ac2));box-shadow:0 4px 12px rgba(0,0,0,.25)}
+.hero{text-align:center;padding:48px 5vw 24px}
+h1{font-size:clamp(2rem,6vw,3.6rem);font-weight:800;letter-spacing:-.035em;line-height:1.1}
+h1 em{font-style:normal;background:linear-gradient(120deg,var(--ac),var(--ac2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{color:var(--mu);max-width:560px;margin:14px auto 28px}
+.tabs{display:flex;gap:8px;overflow-x:auto;justify-content:safe center;padding:4px 2px 12px;scrollbar-width:none}
+.tabs button{flex:none;border:1px solid var(--bd);background:var(--card);color:var(--tx);padding:10px 16px;border-radius:14px;font:600 14px Inter;cursor:pointer;backdrop-filter:blur(10px);transition:.25s}
+.tabs button:hover{transform:translateY(-2px)}
+.tabs button.on{background:linear-gradient(135deg,var(--ac),var(--ac2));color:#fff;border-color:transparent;box-shadow:0 8px 22px rgba(0,0,0,.25)}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:22px;padding:22px;box-shadow:var(--sh);backdrop-filter:blur(18px);text-align:left}
+.panel{max-width:920px;margin:0 auto;animation:pin .4s ease}
+@keyframes pin{from{opacity:0;transform:translateY(10px)}}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:12px}.row:first-child{margin-top:0}
+input[type=text],select{flex:1;min-width:160px;padding:13px 15px;border-radius:13px;border:1px solid var(--bd);background:var(--in);color:var(--tx);font:500 15px Inter;outline:0;transition:.2s}
+input[type=text]:focus,select:focus{border-color:var(--ac);box-shadow:0 0 0 3px var(--g1)}
+select{flex:none;min-width:0}
+.btn{border:0;padding:13px 22px;border-radius:13px;background:linear-gradient(135deg,var(--ac),var(--ac2));color:#fff;font:700 15px Inter;cursor:pointer;box-shadow:0 8px 20px rgba(0,0,0,.22);transition:.2s}
+.btn:hover{transform:translateY(-2px);filter:brightness(1.08)}.btn:active{transform:scale(.96)}
+.btn.s{padding:9px 14px;font-size:13px;background:var(--in);color:var(--tx);border:1px solid var(--bd);box-shadow:none}
+label{display:flex;gap:6px;align-items:center;font-size:14px;color:var(--mu);cursor:pointer}
+.out{max-height:420px;overflow:auto;margin-top:14px;padding:14px;border-radius:14px;background:var(--in);border:1px solid var(--bd)}
+.out p{padding:5px 0;display:flex;gap:12px}.out .t{flex:none;color:var(--ac);font-weight:600;font-size:13px;text-decoration:none;min-width:44px;padding-top:2px}
+mark{background:var(--ac2);color:#fff;border-radius:4px;padding:0 2px}
+.meta{font-weight:600}.meta small{display:block;color:var(--mu);font-weight:400}
+.err{margin-top:14px;padding:14px;border-radius:14px;background:rgba(232,64,61,.14);border:1px solid var(--ac);display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.sk{height:16px;margin:12px 0;border-radius:8px;background:linear-gradient(90deg,var(--bd),var(--g2),var(--bd));background-size:200% 100%;animation:sh 1.2s linear infinite}.sk:nth-child(2n){width:80%}
+@keyframes sh{to{background-position:-200% 0}}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:16px}
+.grid .card{padding:12px}.grid img{width:100%;border-radius:12px;display:block}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.chip{padding:7px 13px;border-radius:99px;border:1px solid var(--bd);background:var(--in);font-size:14px;cursor:pointer;transition:.2s}.chip.on{background:linear-gradient(135deg,var(--ac),var(--ac2));color:#fff;border-color:transparent}
+.ti{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:12px 0;border-bottom:1px solid var(--bd)}.ti small{display:block;font-weight:600}.ok{color:#22a76a}.wa{color:#e0a020}.bad{color:#e8403d}
+.sec{max-width:1000px;margin:70px auto;padding:0 5vw}.sec h2{font-size:1.8rem;letter-spacing:-.02em;margin-bottom:20px}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}.cols .card h3{margin-bottom:6px}.cols p,.faq p{color:var(--mu);font-size:15px}
+details{padding:16px 20px;margin-bottom:10px}summary{cursor:pointer;font-weight:600}details p{margin-top:8px}
+.rv{opacity:0;transform:translateY(22px);transition:.7s}.rv.in{opacity:1;transform:none}
+footer{text-align:center;padding:30px 5vw 50px;color:var(--mu);border-top:1px solid var(--bd);font-size:14px}footer a{color:var(--tx);margin:0 10px;cursor:pointer}footer a:hover{color:var(--ac)}
+dialog{border:1px solid var(--bd);border-radius:22px;background:var(--bg2);color:var(--tx);max-width:560px;width:92%;padding:26px;box-shadow:var(--sh)}dialog::backdrop{background:rgba(0,0,0,.55);backdrop-filter:blur(4px)}dialog h2{margin-bottom:10px}dialog p{color:var(--mu);margin-bottom:10px}dialog .btn{margin-top:10px}
+#toasts{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:50;display:grid;gap:8px}.toast{padding:11px 20px;border-radius:99px;background:var(--tx);color:var(--bg);font-weight:600;font-size:14px;box-shadow:var(--sh);animation:pin .3s}
+:focus-visible{outline:2px solid var(--ac2);outline-offset:2px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div class="blob b1"></div><div class="blob b2"></div>
+<nav><span class="logo"><i>▶</i> TubeKit</span><div class="th" role="group" aria-label="Theme"><button data-t="light" title="Light" aria-label="Light theme">☀️</button><button data-t="dark" title="Dark" aria-label="Dark theme">🌙</button><button data-t="blue" title="Blue" aria-label="Blue theme">💧</button></div></nav>
+
+<header class="hero">
+<h1>Every YouTube tool you need, <em>free</em></h1>
+<p class="sub">Paste a video link, get the full transcript in seconds. Download thumbnails, write titles, build hashtags, and see a video's tags.</p>
+<div class="tabs" role="tablist">
+<button class="on" data-p="tr">📝 Transcript</button><button data-p="th">🖼️ Thumbnail</button><button data-p="ti">✨ Titles</button><button data-p="ha">#️⃣ Hashtags</button><button data-p="ta">🏷️ Tags</button>
+</div>
+</header>
+
+<main style="padding:0 5vw">
+<!-- TRANSCRIPT -->
+<section class="card panel" id="tr">
+<form id="trf" class="row"><input type="text" id="tru" placeholder="Paste a YouTube link (watch, youtu.be, shorts, live…)" aria-label="YouTube link" required><button class="btn">Get transcript</button></form>
+<div id="trerr" class="err" hidden><span id="trem"></span><button class="btn s" id="retry" type="button">Try again</button></div>
+<div id="trbox" hidden>
+<div class="row"><div class="meta" id="trmeta" style="flex:1"></div></div>
+<div class="row"><select id="lang" aria-label="Caption language"></select>
+<select id="tlang" aria-label="Translate"><option value="">No translation</option><option value="en">Translate: English</option><option value="ur">Urdu</option><option value="hi">Hindi</option><option value="ar">Arabic</option><option value="es">Spanish</option><option value="fr">French</option><option value="de">German</option><option value="pt">Portuguese</option><option value="ru">Russian</option><option value="tr">Turkish</option><option value="id">Indonesian</option><option value="ja">Japanese</option><option value="ko">Korean</option><option value="zh-Hans">Chinese</option></select></div>
+<div class="row"><input type="text" id="trs" placeholder="Search in transcript…" aria-label="Search transcript">
+<label><input type="checkbox" id="ts" checked>Timestamps</label><label><input type="checkbox" id="cl">Clean text</label><label><input type="checkbox" id="pg">Paragraphs</label></div>
+<div class="row"><button class="btn s" id="cp">Copy</button>
+<select id="dl" aria-label="Download"><option value="">Download…</option><option value="txt">TXT</option><option value="srt">SRT</option><option value="vtt">VTT</option><option value="pdf">PDF</option></select>
+<span id="cnt" style="color:var(--mu);font-size:14px"></span></div>
+<div id="trout" class="out" aria-live="polite"></div>
+</div>
+</section>
+
+<!-- THUMBNAIL -->
+<section class="card panel" id="th" hidden>
+<form id="thf" class="row"><input type="text" id="thu" placeholder="Paste a YouTube link" aria-label="YouTube link" required><button class="btn">Get thumbnails</button></form>
+<div id="thr" class="grid"></div>
+</section>
+
+<!-- TITLES -->
+<section class="card panel" id="ti" hidden>
+<form id="tif" class="row"><input type="text" id="tik" placeholder="Topic or keyword, e.g. home workout" aria-label="Topic" required>
+<select id="tit" aria-label="Tone"><option value="click">Clickbait</option><option value="pro">Professional</option><option value="edu">Educational</option><option value="fun">Funny</option></select><button class="btn">Generate titles</button></form>
+<div id="tir"></div>
+</section>
+
+<!-- HASHTAGS -->
+<section class="card panel" id="ha" hidden>
+<form id="haf" class="row"><input type="text" id="hak" placeholder="Topic, e.g. travel vlog" aria-label="Topic" required><button class="btn">Generate hashtags</button></form>
+<div id="har" hidden><div class="chips" id="hac"></div>
+<div class="row"><button class="btn s" id="hacp" type="button">Copy selected</button><button class="btn s" id="haall" type="button">Select first 15</button><span id="hact" style="font-size:14px"></span></div></div>
+</section>
+
+<!-- TAGS -->
+<section class="card panel" id="ta" hidden>
+<form id="taf" class="row"><input type="text" id="tau" placeholder="Paste a YouTube link" aria-label="YouTube link" required><button class="btn">Extract tags</button></form>
+<div id="taerr" class="err" hidden><span id="taem"></span></div>
+<div id="tar" hidden><div class="meta" id="tam" style="margin-top:14px"></div><div class="chips" id="tac"></div>
+<div class="row"><button class="btn s" id="tacp" type="button">Copy all</button><button class="btn s" id="tacm" type="button">Copy comma-separated</button><button class="btn s" id="tadl" type="button">Download</button></div></div>
+</section>
+</main>
+
+<section class="sec rv"><h2>How it works</h2><div class="cols">
+<div class="card"><h3>1. Copy the link</h3><p>Open any YouTube video and copy its address from the browser or the Share button.</p></div>
+<div class="card"><h3>2. Paste it here</h3><p>Pick a tool and paste the link. Every common link format works.</p></div>
+<div class="card"><h3>3. Use the result</h3><p>Read, search, copy, or download your transcript, thumbnail, or tags.</p></div></div></section>
+
+<section class="sec rv"><h2>Built for creators and researchers</h2><div class="cols">
+<div class="card"><h3>Reliable transcripts</h3><p>Several YouTube clients are tried automatically, so one failure does not stop you.</p></div>
+<div class="card"><h3>Export formats</h3><p>Download as TXT, SRT, VTT or PDF, with or without timestamps.</p></div>
+<div class="card"><h3>Translate</h3><p>Switch caption language or auto-translate to 14 languages.</p></div>
+<div class="card"><h3>Private</h3><p>No signup and no stored history. Requests are only cached briefly to stay fast.</p></div></div></section>
+
+<section class="sec rv faq"><h2>Questions</h2>
+<details class="card"><summary>Why does a video say "no captions"?</summary><p>The creator has turned captions off and YouTube has not generated automatic ones. Try another video.</p></details>
+<details class="card"><summary>Does it work with Shorts and live streams?</summary><p>Yes. Shorts, live replays, embed links and mobile links are all supported.</p></details>
+<details class="card"><summary>Can I translate the transcript?</summary><p>Yes. Choose a language in the translate menu and the transcript reloads translated.</p></details>
+<details class="card"><summary>Is it free?</summary><p>Yes, every tool is free with no account.</p></details></section>
+
+<footer><div><a data-pg="about">About</a><a data-pg="privacy">Privacy Policy</a><a data-pg="terms">Terms</a><a data-pg="contact">Contact</a></div><p style="margin-top:12px">© 2026 TubeKit. Not affiliated with YouTube or Google.</p></footer>
+<dialog id="dg"><div id="dgc"></div><button class="btn" id="dgx">Close</button></dialog>
+<div id="toasts" role="status"></div>
+
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const toast=m=>{const t=document.createElement('div');t.className='toast';t.textContent=m;$('#toasts').append(t);setTimeout(()=>t.remove(),2200)};
+async function copy(t){try{await navigator.clipboard.writeText(t)}catch{const a=document.createElement('textarea');a.value=t;document.body.append(a);a.select();document.execCommand('copy');a.remove()}toast('Copied')}
+function save(n,t,m='text/plain'){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([t],{type:m+';charset=utf-8'}));a.download=n;a.click();toast('Download started')}
+const vid=u=>{u=(u||'').trim();if(/^[\w-]{11}$/.test(u))return u;try{const x=new URL(/^https?:/i.test(u)?u:'https://'+u),h=x.hostname.replace(/^(www|m|music)\./,'');let id;if(h==='youtu.be')id=x.pathname.split('/')[1];else if(h==='youtube.com')id=x.searchParams.get('v')||(x.pathname.match(/^\/(shorts|embed|live|v)\/([\w-]{11})/)||[])[2];return /^[\w-]{11}$/.test(id||'')?id:null}catch{return null}};
+async function api(u,q){let r;try{r=await fetch('/api/video?url='+encodeURIComponent(u)+q)}catch{throw'Network error. Check your connection and try again.'}const d=await r.json().catch(()=>({}));if(!r.ok)throw d.message||'Something went wrong. Please try again.';return d}
+const fmt=ms=>{const s=Math.floor(ms/1e3),h=Math.floor(s/3600),m=Math.floor(s%3600/60);return(h?h+':'+String(m).padStart(2,'0'):m)+':'+String(s%60).padStart(2,'0')};
+const tc=(ms,sep)=>{const p=(n,l=2)=>String(n).padStart(l,'0');return`${p(Math.floor(ms/36e5))}:${p(Math.floor(ms/6e4)%60)}:${p(Math.floor(ms/1e3)%60)}${sep}${p(ms%1000,3)}`};
+
+// Theme + tabs + dialogs
+$$('[data-t]').forEach(b=>b.onclick=()=>{document.documentElement.dataset.theme=b.dataset.t;try{localStorage.th=b.dataset.t}catch{}});
+$$('.tabs button').forEach(b=>b.onclick=()=>{$$('.tabs button').forEach(x=>x.classList.toggle('on',x===b));$$('.panel').forEach(p=>p.hidden=p.id!==b.dataset.p)});
+const PG={about:'<h2>About</h2><p>TubeKit is a free set of tools for YouTube creators, students and researchers. Paste a link and get a transcript, thumbnails or tags in seconds.</p>',
+privacy:'<h2>Privacy Policy</h2><p>We do not require accounts and do not store the links you enter. Requests are cached on the server for up to 30 minutes to improve speed. Your theme choice is saved in your browser only.</p>',
+terms:'<h2>Terms</h2><p>Use these tools only for content you have the right to use. Transcripts and thumbnails belong to their creators. The service is provided as is, without warranty, and is not affiliated with YouTube.</p>',
+contact:'<h2>Contact</h2><p>Send us a message.</p><div class="row" style="display:grid"><input type="text" id="cn" placeholder="Your name"><input type="text" id="cm" placeholder="Your message"></div>'};
+$$('[data-pg]').forEach(a=>a.onclick=()=>{$('#dgc').innerHTML=PG[a.dataset.pg];$('#dg').showModal();const m=$('#cm');if(m)m.onkeydown=e=>{if(e.key==='Enter'&&m.value.trim())location.href='mailto:support@yourdomain.com?subject='+encodeURIComponent('TubeKit message from '+($('#cn').value||'visitor'))+'&body='+encodeURIComponent(m.value)}});
+$('#dgx').onclick=()=>$('#dg').close();
+new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');o.unobserve(e.target)}}),{threshold:.1}).observe&&$$('.rv').forEach(el=>{new IntersectionObserver((es,o)=>{if(es[0].isIntersecting){el.classList.add('in');o.disconnect()}},{threshold:.1}).observe(el)});
+
+// ---------- Transcript ----------
+let T=null;
+const fail=m=>{$('#trem').textContent=m;$('#trerr').hidden=false};
+async function load(lang='',tl=''){
+ const u=$('#tru').value;$('#trerr').hidden=true;
+ if(!vid(u)){$('#trbox').hidden=true;return fail('Paste a valid YouTube link, for example https://youtu.be/dQw4w9WgXcQ')}
+ $('#trbox').hidden=false;$('#trout').innerHTML='<div class="sk"></div
